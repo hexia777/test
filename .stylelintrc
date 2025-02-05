@@ -1,0 +1,10 @@
+{
+  "extends": ["stylelint-config-standard"],
+  "rules": {
+    "no-descending-specificity": null,
+    "declaration-block-trailing-semicolon": null,
+    "declaration-colon-newline-after": null,
+    "selector-id-pattern": "^[-_a-z0-9]+$",
+    "selector-class-pattern": "^[-_a-z0-9]+$"
+  }
+}
