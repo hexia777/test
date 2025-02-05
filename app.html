@@ -1,0 +1,19 @@
+<!doctype html>
+<html {{ HTML_ATTRS }}>
+
+<head>
+  <script>
+    function changeJsCdnDomain(index,publicPath) {
+        const domains = ['c4.vanceai.com', 'c5.vanceai.com', 'c6.vanceai.com'];
+        const newDomain =  domains[index % domains.length];
+        return publicPath.replace('c.vanceai.com', newDomain)
+    }
+  </script>
+  {{ HEAD }}
+</head>
+
+<body {{ BODY_ATTRS }}>
+  {{ APP }}
+</body>
+
+</html>

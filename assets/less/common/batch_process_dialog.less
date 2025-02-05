@@ -1,0 +1,87 @@
+.batch-process-dialog {
+  margin: 0;
+
+  .process-container {
+    position: relative;
+    min-height: 620 / @base;
+    max-height: 74vh;
+    // overflow: auto;
+    &::-webkit-scrollbar {
+      width: 18px;
+      height: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border: 6px solid rgba(0, 0, 0, 0);
+      border-radius: 12px;
+      box-shadow: 8px 0 0 #a5adb7 inset;
+
+      &:hover {
+        box-shadow: 8px 0 0 #4a4a4a inset;
+      }
+    }
+  }
+
+  .con-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 100vh;
+
+    & > .container {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+  }
+
+  .top {
+    position: relative;
+    padding: 0 20 / @base;
+    border-bottom: 2px solid rgb(242, 242, 242);
+
+    p {
+      font-size: 24px;
+      font-weight: bold;
+      line-height: 2.25;
+      color: rgb(54, 66, 85);
+    }
+  }
+
+  .close {
+    position: absolute;
+    top: 16 / @base;
+    right: 30 / @base;
+    z-index: 2;
+    cursor: pointer;
+  }
+
+  .moveL-enter-active,
+  .moveL-leave-active {
+    transition: all 0.3s linear;
+    transform: translateX(0%);
+  }
+
+  .moveL-enter,
+  .moveL-leave {
+    transform: translateX(-100%);
+  }
+
+  .moveL-leave-to {
+    transform: translateX(-100%);
+  }
+}
+
+@media (max-width: 768px) {
+  .batch-process-dialog {
+    .con-box {
+      align-items: start;
+      padding-top: 5%;
+
+      & > .container {
+        overflow: visible;
+      }
+    }
+  }
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML 字符串替换 Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <h1>HTML 字符串替换 Demo</h1>
+    <textarea id="htmlInput" placeholder="在这里输入你的 HTML 字符串..."></textarea>
+    <br>
+    <button id="replaceButton">替换 HTML 字符串</button>
+    <h2>替换后的结果:</h2>
+    <pre id="output"></pre>
+    <image src="https://test-s3-images.vanceai.com/img/2024/10/14/9/J/5933682/1486914700025630721_1.png?Expires=1728965157&Signature=YkkpAq~3T9T2DVt3EshB~zyhwuMA6GTFJpLXfyf7GOPDzhlT6uInEnXFV3nVvUNP4Vp8nuABNGyk2GkTjill2hKPoIIhQjjZdm0P49t0dz2tfz9QAd2qS6QjnfgAbSYbPHOZuS~K~zp9dl3z~sLLnljouGhjw~igbdq7oAocfTD1aCSavjSBrFR5wlbdRPrE~dlkkBzX9kuEEj8Mf2ie6z6ALJMDCAVacmP93I5ojZhL~C9ajgos-QLI14wAoo~HGQg8rsJ5CvsmNUBvH4C5JZKGlWfdJ~1Z2k1n-Dpgi2VtSFY1zZAfOhsxJ8r3gThyXgSng65XAbrwJma~iMeg5w__&Key-Pair-Id=K3M7EQ00PZNH83"/>
+
+    <script>
+        document.getElementById('replaceButton').addEventListener('click', function() {
+            var html = document.getElementById('htmlInput').value;
+
+            const regex = /https:\/\/c(\d*)\.vanceai\.com[^"'\s]*/g
+
+            const hashUrlToNum = (url) => {
+              // 定义url hash 到数字
+              let hash = 0
+              for (let i = 0; i < url.length; i++) {
+                const char = url.charCodeAt(i)
+                hash = (hash * 31 + char) % 100000 // 增加hash计算复杂度，使结果分布更广
+              }
+              // 将hash值均匀分布到 4, 5, 6 三个数字
+              return (hash % 3) + 4
+            }
+
+            // 使用正则表达式替换并确保资源分布到 c4, c5, c6
+            html = html.replace(regex, function (match, group) {
+              const hash = hashUrlToNum(match)
+
+              // 如果捕获组为空或为 0，则表示是 c.dvdfab.cn 或 c0.dvdfab.cn
+              if (!group || group === '0') {
+                return match.replace(`c${group || ''}.vanceai.com`, `c${hash}.vanceai.com`)
+              }
+
+              // 如果已经是 c1 到 c6，重新分配到 c4 到 c6
+              return match.replace(`c${group}.vanceai.com`, `c${hash}.vanceai.com`)
+            })
+            
+            // 将结果显示在 output 区域
+            document.getElementById('output').innerText = html;
+        });
+    </script>
+</body>
+</html>

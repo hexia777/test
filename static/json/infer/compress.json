@@ -1,0 +1,9 @@
+﻿{
+	"job": "compress",
+	"config": {
+		"module": "compress",
+		"module_params": {
+				"quality": 50
+		}
+}
+}
